@@ -16,3 +16,6 @@
 
 # Ignore secret file
 /.secret
+
+# Ignore database information
+/config/database.yml
