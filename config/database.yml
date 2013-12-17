@@ -12,9 +12,9 @@ development:
 test:
   adapter: postgresql
   host: localhost
-  username: sample_app
-  password: sample_app
-  database: sample_app
+  username: test_app
+  password: test_app
+  database: test_app
 
 production:
   adapter: postgresql
