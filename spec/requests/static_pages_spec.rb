@@ -18,8 +18,8 @@ describe "Static pages" do
     it_should_behave_like "all static pages"
     it { should_not have_title('| Home') }
 	
-	click_link "About"
-    expect(page).to have_title(full_title('About Us'))
+	#click_link "About"
+    #expect(page).to have_title(full_title('About Us'))
   end
 
   describe "Help page" do
@@ -42,4 +42,5 @@ describe "Static pages" do
     it { should have_selector('h1', text: 'Contact') }
     it { should have_title(full_title('Contact')) }
   end
+  
 end
