@@ -28,5 +28,16 @@ describe "User pages" do
         expect { click_button submit }.to change(User, :count).by(1)
       end
     end
+	
+	describe "after saving the user" do
+        before { click_button submit }
+        let(:user) { User.new(name: "test", email: "essai@test.com",
+                     password: "test", password_confirmation: "test") }
+
+        it { should have_link('Sign out') }
+        it { should have_title(user.name) }
+        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+	end
+	
   end
 end
