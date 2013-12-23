@@ -32,12 +32,8 @@ describe "Authentication" do
 	  before { sign_in user }
 
       it { should have_title(user.name) }
-<<<<<<< HEAD
       #it { should have_link('Profile',     href: users_path(user)) }
-=======
-      it { should have_link('Profile') }
-      it { should have_link('Settings',    href: edit_user_path(user)) }
->>>>>>> updating-users
+      #it { should have_link('Settings',    href: edit_user_path(user)) }
       it { should have_link('Sign out',    href: signout_path) }
       it { should_not have_link('Sign in', href: signin_path) }
 	  
