@@ -5,6 +5,8 @@ describe User do
   before do
     @user = User.new(name: "Example User", email: "user@example.com",
                      password: "foobar", password_confirmation: "foobar")
+	@user2 = User.new(name: "Example User 2", email: "user2@example.com",
+                     password: "foobar", password_confirmation: "foobar")
   end
 
   subject { @user }
@@ -17,6 +19,13 @@ describe User do
   it { should respond_to(:authenticate) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
+  it { should respond_to(:feed) }
+  it { should respond_to(:relationships) }
+  it { should respond_to(:followed_users) }
+  it { should respond_to(:following?) }
+  it { should respond_to(:follow!) }
+  it { should respond_to(:unfollow!) }
+  it { should respond_to(:reverse_relationships) }
 
   it { should be_valid }
   it { should_not be_admin }
@@ -112,5 +121,29 @@ describe User do
 		before { @user.save }
 		its(:remember_token) { should_not be_blank }
 	end
+  
+    describe "following" do
+      before do
+	  	@user.save
+		@user2.save
+        @user.follow!(@user2)
+      end
+
+      it { should be_following(@user2) }
+      its(:followed_users) { should include(@user2) }
+	  
+	  describe "followed user" do
+        subject { @user2 }
+        its(:followers) { should include(@user) }
+      end
+	
+	  describe "and unfollowing" do
+        before { @user.unfollow!(@user2) }
+
+        it { should_not be_following(@user2) }
+        its(:followed_users) { should_not include(@user2) }
+      end
+	
+    end
   
 end
